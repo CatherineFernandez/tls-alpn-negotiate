@@ -19,3 +19,10 @@ TLS clients and servers often support several application protocols, but the han
 ## Behaviour and edge cases
 
 The function returns `null` when there is no shared protocol. This is deliberate: failure to negotiate is a normal ALPN outcome and callers usually want to handle it without an exception. Protocol names are compared as exact strings, so `h2` and `H2` are different protocols. Inputs must be arrays; a non-array argument throws a `TypeError`. The server list may contain non-string values only if they are never reached before a match, but the function validates each candidate it inspects.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
