@@ -1,6 +1,6 @@
 {
   "name": "tls-alpn-negotiate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Selects the mutually supported application protocol from a ClientHello ALPN list and a server preference order.",
   "type": "module",
   "main": "src/index.js",
